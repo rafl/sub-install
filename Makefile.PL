@@ -12,6 +12,7 @@ WriteMakefile(
     PREREQ_PM => {
         'Scalar::Util' => 0,
         'Test::More'   => 0,
+        'Sub::Name'    => 0,
     },
     (eval { ExtUtils::MakeMaker->VERSION(6.46) }
       ? (META_MERGE => {

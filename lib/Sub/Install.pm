@@ -4,6 +4,7 @@ use warnings;
 use strict;
 
 use Carp;
+use Sub::Name ();
 use Scalar::Util ();
 
 =head1 NAME
@@ -181,8 +182,9 @@ sub _do_with_warn {
 sub _installer {
   sub {
     my ($pkg, $name, $code) = @_;
+    my $sym = "${pkg}::${name}";
     no strict 'refs'; ## no critic ProhibitNoStrict
-    *{"$pkg\::$name"} = $code;
+    *{$sym} = Sub::Name::subname $sym => $code;
     return $code;
   }
 }
